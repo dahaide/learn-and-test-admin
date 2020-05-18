@@ -1,4 +1,5 @@
 export default {
+  general_interface: '通用接口',
   home: '首頁',
   login: '登錄',
   components: '组件',

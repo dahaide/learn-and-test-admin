@@ -1,4 +1,5 @@
 export default {
+  general_interface: 'general-interface',
   home: 'Home',
   login: 'Login',
   components: 'Components',

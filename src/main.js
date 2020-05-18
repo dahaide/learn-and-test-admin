@@ -10,6 +10,7 @@ import config from '@/config'
 import importDirective from '@/directive'
 import { directive as clickOutside } from 'v-click-outside-x'
 import installPlugin from '@/plugin'
+import axios from 'axios'
 import './index.less'
 import '@/assets/icons/iconfont.css'
 import TreeTable from 'tree-table-vue'
@@ -36,6 +37,22 @@ Vue.config.productionTip = false
  * @description 全局注册应用配置
  */
 Vue.prototype.$config = config
+
+/**
+ * @description axios
+ */
+const instance = axios.create({
+  method: 'post',
+  baseURL: '/SupplierSys',
+  timeout: 3000,
+  headers: {}
+})
+instance.interceptors.response.use(function (response) {
+  return response.data;
+}, function (error) {
+  return Promise.reject(error);
+});
+Vue.prototype.$http = instance
 /**
  * 注册指令
  */
