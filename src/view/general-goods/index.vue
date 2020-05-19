@@ -4,10 +4,10 @@
       <Button icon="ios-add-circle-outline" type="primary" @click="addRow">新增</Button>
     </div>
     <i-table :columns="columns" :data="data"></i-table>
-    <Modal v-model="modal.model" title="新增" @on-cancel="onCancel" @on-ok="onOk">
+    <Modal v-model="modal.model" :footer-hide="modal.footerHide" title="新增" @on-cancel="onCancel" @on-ok="onOk">
       <Form ref="form" :model="form" :label-width="120" style="padding: 0px 20px">
         <FormItem :label="item.title" :prop="item.key" v-for="(item, index) in columns.slice(0, -1)" :key="'columns' + index">
-            <Input v-model="form[item.key]" placeholder="请输入"/>
+            <Input v-model="form[item.key]" :readonly="modal.readonly" placeholder="请输入"/>
         </FormItem>
       </Form>
     </Modal>
@@ -38,25 +38,30 @@ export default {
           title: '操作',
           key: 'action',
           fixed: 'right',
-          width: 90,
+          width: 120,
           render (h, { row, column, index }) {
             return h('div', [
               h('Icon', {
-                props: { type: 'ios-trash', size: '20', color: '#2d8cf0' },
+                props: { type: 'ios-eye', size: '20', color: '#ff9900' },
                 style: { cursor: 'pointer', paddingRight: '10px' },
-                on: { click: _self.deleteRow(row) }
+                on: { click: _self.viewDetail(row, 'get') }
               }),
               h('Icon', {
-                props: { type: 'ios-eye', size: '20', color: '#2d8cf0' },
+                props: { type: 'md-create', size: '20', color: '#2d8cf0' },
+                style: { cursor: 'pointer', paddingRight: '10px' },
+                on: { click: _self.viewDetail(row, 'update') }
+              }),
+              h('Icon', {
+                props: { type: 'ios-trash', size: '20', color: '#2d8cf0' },
                 style: { cursor: 'pointer' },
-                on: { click: _self.viewDetail(row) }
+                on: { click: _self.deleteRow(row) }
               })
             ])
           }
         }
       ],
       data: [],
-      modal: { model: false },
+      modal: { type: 'save', model: false, footerHide: false, readonly: false },
       form: {}
     }
   },
@@ -70,31 +75,33 @@ export default {
         data: { currPage: 1, pageSize: 10 }
       }).then(res => { this.data = res.data.list || [] })
     },
-    addRow () { this.modal.model = true },
+    addRow () { [this.modal.model, this.modal.type] = [true, 'save'] },
     deleteRow (row) {
       return () => {
         this.$http.request({
-          url: `/goods/delete/${row.goodsTypeId}`
+          url: `/goods/delete/${row.goodsId}`
         }).then(res => this.getTable())
       }
     },
-    viewDetail (row) {
+    viewDetail (row, type) {
       return () => {
         this.$http.request({
           method: 'get',
-          url: `/goods/get/${row.goodsTypeId}`
+          url: `/goods/get/${row.goodsId}`
         }).then(res => {
           this.form = res.data
-          this.modal.model = true
+          this.modal.model = true;
+          [this.modal.footerHide, this.modal.readonly, this.modal.type] = [type === 'get', type === 'get', type]
         })
       }
     },
     onCancel () {
+      [this.modal.footerHide, this.modal.readonly, this.modal.type] = [false, false, 'save']
       this.$refs.form.resetFields()
     },
     onOk () {
       this.$http.request({
-        url: '/goods/save',
+        url: `/goods/${this.modal.type}`,
         data: this.form
       }).then(res => this.getTable())
     }

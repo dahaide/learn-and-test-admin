@@ -1,5 +1,10 @@
 export default {
-  general_interface: '通用接口',
+  general_goods: '商品',
+  general_interface: '类别',
+  general_logisticsType: '物流',
+  general_invoiceType: '发票',
+  general_supplier: '供应商',
+  general_user: '用户',
   home: '首頁',
   login: '登錄',
   components: '组件',

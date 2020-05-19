@@ -1,5 +1,5 @@
 <template>
-  <h1 style="text-align: center; margin-top: calc(50% - 200px)"> welcome! </h1>
+  <h1 style="text-align: center; margin-top: calc(30% - 100px)"> welcome! </h1>
 </template>
 
 <script>

@@ -1,5 +1,10 @@
 export default {
+  general_goods: 'goods',
   general_interface: 'general-interface',
+  general_logisticsType: 'logisticsType',
+  general_invoiceType: 'invoiceType',
+  general_supplier: 'supplier',
+  general_user: 'user',
   home: 'Home',
   login: 'Login',
   components: 'Components',

@@ -51,8 +51,27 @@ export default [
     ]
   },
   {
-    path: '/admin',
-    name: 'admin',
+    path: '/goods',
+    name: 'goods',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'general-goods',
+        name: 'general_goods',
+        meta: {
+          title: 'general_goods',
+          icon: 'ios-book'
+        },
+        component: () => import('@/view/general-goods')
+      }
+    ]
+  },
+  {
+    path: '/interface',
+    name: 'interface',
     component: Main,
     meta: {
       hideInBread: true
@@ -66,6 +85,82 @@ export default [
           icon: 'ios-book'
         },
         component: () => import('@/view/general-interface')
+      }
+    ]
+  },
+  {
+    path: '/logisticsType',
+    name: 'logisticsType',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'general-logisticsType',
+        name: 'general_logisticsType',
+        meta: {
+          title: 'general_logisticsType',
+          icon: 'ios-book'
+        },
+        component: () => import('@/view/general-logisticsType')
+      }
+    ]
+  },
+  {
+    path: '/invoiceType',
+    name: 'invoiceType',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'general-invoiceType',
+        name: 'general_invoiceType',
+        meta: {
+          title: 'general_invoiceType',
+          icon: 'ios-book'
+        },
+        component: () => import('@/view/general-invoiceType')
+      }
+    ]
+  },
+  {
+    path: '/supplier',
+    name: 'supplier',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'general-supplier',
+        name: 'general_supplier',
+        meta: {
+          title: 'general_supplier',
+          icon: 'ios-book'
+        },
+        component: () => import('@/view/general-supplier')
+      }
+    ]
+  },
+  {
+    path: '/user',
+    name: 'user',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'general-user',
+        name: 'general_user',
+        meta: {
+          title: 'general_user',
+          icon: 'ios-book'
+        },
+        component: () => import('@/view/general-user')
       }
     ]
   },
