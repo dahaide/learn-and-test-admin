@@ -1,9 +1,22 @@
 <template>
   <div>
-    <div style="text-align: left; padding-bottom: 10px">
+    <Form ref="searchForm" :model="searchForm" :label-width="60" style="padding: 0px 20px">
+      <Row :gutter="10">
+        <Col span="6" v-for="(item, index) in searchFormList" :key="'columns' + index">
+          <FormItem :label="item.title" :prop="item.key">
+              <Input v-model.trim="searchForm[item.key]" placeholder="请输入"/>
+          </FormItem>
+        </Col>
+        <Col span="6">
+          <Button icon="ios-add-circle-outline" type="primary" @click="getTable">查询</Button>
+        </Col>
+      </Row>
+    </Form>
+    <div style="text-align: right; padding-bottom: 10px">
       <Button icon="ios-add-circle-outline" type="primary" @click="addRow">新增</Button>
     </div>
     <i-table :columns="columns" :data="data"></i-table>
+    <Page :total="page.total" :current="searchForm.currPage" :page-size="searchForm.pageSize" show-elevator style="margin-top: 10px" @on-change="pageChange"/>
     <Modal v-model="modal.model" :footer-hide="modal.footerHide" title="新增" @on-cancel="onCancel" @on-ok="onOk">
       <Form ref="form" :model="form" :label-width="120" style="padding: 0px 20px">
         <FormItem :label="item.title" :prop="item.key" v-for="(item, index) in columns.slice(0, -1)" :key="'columns' + index">
@@ -62,7 +75,12 @@ export default {
       ],
       data: [],
       modal: { type: 'save', model: false, footerHide: false, readonly: false },
-      form: {}
+      form: {},
+      searchFormList: [
+        { title: 'name', key: 'name' }
+      ],
+      searchForm: { name: '', pageSize: 10, currPage: 1 },
+      page: { total: 0 }
     }
   },
   mounted () {
@@ -72,8 +90,11 @@ export default {
     getTable () {
       this.$http.request({
         url: '/goods/selectAll',
-        data: { currPage: 1, pageSize: 10 }
-      }).then(res => { this.data = res.data.list || [] })
+        data: this.searchForm
+      }).then(res => {
+        this.data = res.data.list || []
+        this.page.total = res.data.total
+      })
     },
     addRow () { [this.modal.model, this.modal.type] = [true, 'save'] },
     deleteRow (row) {
@@ -104,6 +125,10 @@ export default {
         url: `/goods/${this.modal.type}`,
         data: this.form
       }).then(res => this.getTable())
+    },
+    pageChange (page) {
+      this.searchForm.currPage = page
+      this.getTable()
     }
   }
 }
