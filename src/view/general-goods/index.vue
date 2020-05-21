@@ -3,7 +3,7 @@
     <Form ref="searchForm" :model="searchForm" :label-width="60" style="padding: 0px 20px">
       <Row :gutter="10">
         <Col span="6" v-for="(item, index) in searchFormList" :key="'columns' + index">
-          <FormItem :label="item.title" :prop="item.key">
+          <FormItem :label="item.title" :prop="item.key" style="margin-bottom: 10px">
               <Input v-model.trim="searchForm[item.key]" placeholder="请输入"/>
           </FormItem>
         </Col>
@@ -15,11 +15,14 @@
     <div style="text-align: right; padding-bottom: 10px">
       <Button icon="ios-add-circle-outline" type="primary" @click="addRow">新增</Button>
     </div>
-    <i-table :columns="columns" :data="data"></i-table>
-    <Page :total="page.total" :current="searchForm.currPage" :page-size="searchForm.pageSize" show-elevator style="margin-top: 10px" @on-change="pageChange"/>
+    <i-table :columns="columns.filter(i => i.table)" :data="data"></i-table>
+    <Page show-elevator style="margin-top: 10px"
+      :total="page.total" :current="searchForm.currPage" :page-size="searchForm.pageSize"
+      @on-change="pageChange"
+    />
     <Modal v-model="modal.model" :footer-hide="modal.footerHide" title="新增" @on-cancel="onCancel" @on-ok="onOk">
       <Form ref="form" :model="form" :label-width="120" style="padding: 0px 20px">
-        <FormItem :label="item.title" :prop="item.key" v-for="(item, index) in columns.slice(0, -1)" :key="'columns' + index">
+        <FormItem :label="item.title" :prop="item.key" v-for="(item, index) in columns.filter(i => i.detail)" :key="'columns' + index">
             <Input v-model="form[item.key]" :readonly="modal.readonly" placeholder="请输入"/>
         </FormItem>
       </Form>
@@ -34,24 +37,25 @@ export default {
     const _self = this
     return {
       columns: [
-        { title: 'buyingPrice', key: 'buyingPrice', width: 100, ellipsis: true },
-        { title: 'createdBy', key: 'createdBy', width: 100, ellipsis: true, sortable: true },
-        { title: 'createdTime', key: 'createdTime', width: 180, ellipsis: true },
-        { title: 'enableFlag', key: 'enableFlag', width: 100, ellipsis: true },
-        { title: 'goodsId', key: 'goodsId', width: 100, ellipsis: true },
-        { title: 'guidancePrice', key: 'guidancePrice', width: 100, ellipsis: true },
-        { title: 'maximumDailyDelivery', key: 'maximumDailyDelivery', width: 100, ellipsis: true },
-        { title: 'period', key: 'period', width: 100, ellipsis: true, sortable: true },
-        { title: 'productName', key: 'productName', width: 100, ellipsis: true, sortable: true },
-        { title: 'region', key: 'region', width: 100, ellipsis: true, sortable: true },
-        { title: 'revision', key: 'revision', width: 100, ellipsis: true, sortable: true },
-        { title: 'specification', key: 'specification', width: 100, ellipsis: true, sortable: true },
-        { title: 'stock', key: 'stock', width: 100, ellipsis: true, sortable: true },
+        { title: 'buyingPrice', key: 'buyingPrice', width: 100, ellipsis: true, table: true, detail: true },
+        { title: 'createdBy', key: 'createdBy', width: 100, ellipsis: true, sortable: true, table: true, detail: true },
+        { title: 'createdTime', key: 'createdTime', width: 180, ellipsis: true, table: true, detail: true },
+        { title: 'enableFlag', key: 'enableFlag', width: 100, ellipsis: true, table: true, detail: true },
+        { title: 'goodsId', key: 'goodsId', width: 100, ellipsis: true, table: true, detail: true },
+        { title: 'guidancePrice', key: 'guidancePrice', width: 100, ellipsis: true, table: true, detail: true },
+        { title: 'maximumDailyDelivery', key: 'maximumDailyDelivery', width: 100, ellipsis: true, table: true, detail: true },
+        { title: 'period', key: 'period', width: 100, ellipsis: true, sortable: true, table: true, detail: true },
+        { title: 'productName', key: 'productName', width: 100, ellipsis: true, sortable: true, table: true, detail: true },
+        { title: 'region', key: 'region', width: 100, ellipsis: true, sortable: true, table: true, detail: true },
+        { title: 'revision', key: 'revision', width: 100, ellipsis: true, sortable: true, table: true, detail: true },
+        { title: 'specification', key: 'specification', width: 100, ellipsis: true, sortable: true, table: true, detail: true },
+        { title: 'stock', key: 'stock', width: 100, ellipsis: true, sortable: true, table: true, detail: true },
         {
           title: '操作',
           key: 'action',
           fixed: 'right',
           width: 120,
+          table: true,
           render (h, { row, column, index }) {
             return h('div', [
               h('Icon', {
