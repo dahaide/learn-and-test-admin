@@ -37,19 +37,19 @@ export default {
     const _self = this
     return {
       columns: [
-        { title: '进货价', key: 'buyingPrice', width: 100, ellipsis: true, table: true, detail: true },
-        { title: 'createdBy', key: 'createdBy', width: 100, ellipsis: true, sortable: true, table: false, detail: false },
+        { title: '进货价', key: 'buyingPrice', ellipsis: true, table: true, detail: true },
+        { title: 'createdBy', key: 'createdBy', ellipsis: true, sortable: true, table: false, detail: false },
         { title: 'createdTime', key: 'createdTime', width: 180, ellipsis: true, table: false, detail: false },
-        { title: 'enableFlag', key: 'enableFlag', width: 100, ellipsis: true, table: false, detail: false },
-        { title: 'goodsId', key: 'goodsId', width: 100, ellipsis: true, table: false, detail: false },
-        { title: '销售指导价', key: 'guidancePrice', width: 100, ellipsis: true, table: true, detail: true },
-        { title: '日最大发货量', key: 'maximumDailyDelivery', width: 100, ellipsis: true, table: true, detail: true },
-        { title: '供应周期', key: 'period', width: 100, ellipsis: true, sortable: true, table: true, detail: true },
-        { title: '产品名称', key: 'productName', width: 100, ellipsis: true, sortable: true, table: true, detail: true },
-        { title: '所属地区', key: 'region', width: 100, ellipsis: true, sortable: true, table: true, detail: true },
-        { title: 'revision', key: 'revision', width: 100, ellipsis: true, sortable: true, table: false, detail: false },
-        { title: '产品规格', key: 'specification', width: 100, ellipsis: true, sortable: true, table: true, detail: true },
-        { title: '目前库存', key: 'stock', width: 100, ellipsis: true, sortable: true, table: true, detail: true },
+        { title: 'enableFlag', key: 'enableFlag', ellipsis: true, table: false, detail: false },
+        { title: 'goodsId', key: 'goodsId', ellipsis: true, table: false, detail: false },
+        { title: '销售指导价', key: 'guidancePrice', ellipsis: true, table: true, detail: true },
+        { title: '日最大发货量', key: 'maximumDailyDelivery', ellipsis: true, table: true, detail: true },
+        { title: '供应周期', key: 'period', ellipsis: true, sortable: true, table: true, detail: true },
+        { title: '产品名称', key: 'productName', ellipsis: true, sortable: true, table: true, detail: true },
+        { title: '所属地区', key: 'region', ellipsis: true, sortable: true, table: true, detail: true },
+        { title: 'revision', key: 'revision', ellipsis: true, sortable: true, table: false, detail: false },
+        { title: '产品规格', key: 'specification', ellipsis: true, sortable: true, table: true, detail: true },
+        { title: '目前库存', key: 'stock', ellipsis: true, sortable: true, table: true, detail: true },
         {
           title: '操作',
           key: 'action',
@@ -81,7 +81,7 @@ export default {
       modal: { type: 'save', model: false, footerHide: false, readonly: false },
       form: {},
       searchFormList: [
-        { title: 'name', key: 'name' }
+        { title: '产品名称', key: 'name' }
       ],
       searchForm: { name: '', pageSize: 10, currPage: 1 },
       page: { total: 0 }

@@ -37,7 +37,7 @@ export default {
     const _self = this
     return {
       columns: [
-        { title: 'bankAccount', key: 'bankAccount', width: 100, ellipsis: true, table: true, detail: true },
+        { title: 'bankAccount', key: 'bankAccount', ellipsis: true, table: true, detail: true },
         {
           title: '操作',
           key: 'action',
