@@ -37,14 +37,14 @@ export default {
     const _self = this
     return {
       columns: [
-        { title: 'createdBy', key: 'createdBy', width: 100, ellipsis: true, table: true, detail: true },
-        { title: 'createdTime', key: 'createdTime', width: 180, ellipsis: true, sortable: true, table: true, detail: true },
-        { title: 'enableFlag', key: 'enableFlag', width: 100, ellipsis: true, table: true, detail: true },
-        { title: 'logisticsTypeId', key: 'logisticsTypeId', width: 120, ellipsis: true, table: true, detail: true },
-        { title: 'logisticsTypeName', key: 'logisticsTypeName', width: 150, ellipsis: true, table: true, detail: true },
-        { title: 'revision', key: 'revision', width: 100, ellipsis: true, table: true, detail: true },
-        { title: 'updatedBy', key: 'updatedBy', width: 100, ellipsis: true, table: true, detail: true },
-        { title: 'updatedTime', key: 'updatedTime', width: 180, ellipsis: true, sortable: true, table: true, detail: true },
+        { title: 'createdBy', key: 'createdBy', width: 100, ellipsis: true, table: false, detail: false },
+        { title: 'createdTime', key: 'createdTime', width: 180, ellipsis: true, sortable: true, table: false, detail: false },
+        { title: 'enableFlag', key: 'enableFlag', width: 100, ellipsis: true, table: false, detail: false },
+        { title: '物流类别ID', key: 'logisticsTypeId', width: 120, ellipsis: true, table: true, detail: true },
+        { title: '物流类别名称', key: 'logisticsTypeName', width: 150, ellipsis: true, table: true, detail: true },
+        { title: 'revision', key: 'revision', width: 100, ellipsis: true, table: false, detail: false },
+        { title: 'updatedBy', key: 'updatedBy', width: 100, ellipsis: true, table: false, detail: false },
+        { title: 'updatedTime', key: 'updatedTime', width: 180, ellipsis: true, sortable: true, table: false, detail: false },
         {
           title: '操作',
           key: 'action',
