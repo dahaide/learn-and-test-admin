@@ -43,7 +43,11 @@ Vue.prototype.$config = config
  */
 const instance = axios.create({
   method: 'post',
-  baseURL: '/SupplierSys',
+  // baseURL: '/SupplierSys',
+  // baseURL: '/',
+  baseURL: process.env.NODE_ENV === 'production'
+    ? '/'
+    : '/SupplierSys',
   timeout: 3000,
   headers: {}
 })
